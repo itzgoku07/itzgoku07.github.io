@@ -45,7 +45,7 @@
         </div>
     </div>
 
-    <!-- 2. DASHBOARD (Initially Hidden) -->
+    <!-- 2. DASHBOARD -->
     <div id="dashboard-screen" class="hidden flex-1 flex flex-col h-full">
         <!-- Header -->
         <header class="bg-white border-b border-slate-200 h-16 flex items-center justify-between px-6 shadow-sm z-10">
@@ -67,7 +67,7 @@
         <main class="flex-1 p-8 overflow-y-auto">
             <div class="max-w-5xl mx-auto">
                 
-                <!-- TODAY'S TEST NOTIFICATION BANNER -->
+                <!-- TODAY'S TEST NOTIFICATION -->
                 <div id="todays-test-banner" class="hidden mb-8 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-xl shadow-lg p-1 text-white animate-fade-in-up">
                     <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 flex flex-col sm:flex-row items-center justify-between gap-4 border border-white/20">
                         <div class="flex items-center gap-4">
@@ -76,7 +76,7 @@
                             </div>
                             <div>
                                 <h3 class="font-bold text-lg">Test Available for Today!</h3>
-                                <p class="text-emerald-50 text-sm" id="todays-test-name">JEE Mock Paper 1</p>
+                                <p class="text-emerald-50 text-sm" id="todays-test-name">Loading...</p>
                             </div>
                         </div>
                         <button id="start-today-btn" class="bg-white text-emerald-700 hover:bg-emerald-50 font-bold py-2 px-6 rounded-lg shadow-md transition transform active:scale-95 whitespace-nowrap">
@@ -85,46 +85,57 @@
                     </div>
                 </div>
 
+                <!-- Controls -->
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-lg font-semibold text-slate-600">Available Papers</h2>
-                    <!-- Added ID and 'hidden' class by default -->
-                    <button id="create-test-btn" onclick="openAddModal()" class="hidden flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium shadow-md transition-all active:scale-95">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                        Create New Test
-                    </button>
+                    <div class="flex gap-2">
+                        <!-- Hidden Folder Input -->
+                        <input type="file" id="folder-input" webkitdirectory directory multiple class="hidden" />
+                        
+                        <!-- Scan Button (Visible to Admin Only) -->
+                        <button id="scan-btn" onclick="triggerScan()" class="hidden flex items-center gap-2 bg-slate-800 hover:bg-slate-900 text-white px-4 py-2 rounded-lg font-medium shadow-md transition-all active:scale-95">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                            Scan 'Test' Folder
+                        </button>
+                        
+                        <!-- Manual Add (Visible to Admin Only) -->
+                        <button id="create-test-btn" onclick="openAddModal()" class="hidden flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium shadow-md transition-all active:scale-95">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                            Manual Add
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Test Grid -->
                 <div id="test-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Cards will be injected here -->
+                    <!-- Cards injected here -->
                 </div>
                 
                 <div id="empty-state" class="hidden text-center py-20">
                     <div class="w-16 h-16 bg-slate-200 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-400 text-3xl">?</div>
-                    <h3 class="text-slate-500 font-medium">No tests found. Create one to get started!</h3>
+                    <h3 class="text-slate-500 font-medium">No tests found.</h3>
+                    <p class="text-sm text-slate-400 mt-1">Admin: Click "Scan 'Test' Folder" to import.</p>
                 </div>
             </div>
         </main>
     </div>
 
-    <!-- 3. ADD TEST MODAL -->
+    <!-- MANUAL ADD MODAL -->
     <div id="add-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
         <div class="bg-white w-full max-w-md rounded-xl shadow-xl p-6">
-            <h3 class="text-xl font-bold text-slate-800 mb-4">Add New Test</h3>
+            <h3 class="text-xl font-bold text-slate-800 mb-4">Add Test Manually</h3>
             <form id="add-test-form" class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-1">Test Name</label>
-                    <input type="text" id="test-name" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" placeholder="e.g., 01-12-2025 Paper 1" required>
-                    <p class="text-xs text-slate-500 mt-1">Tip: Use format DD-MM-YYYY in name for auto-detection.</p>
+                    <input type="text" id="test-name" class="w-full px-3 py-2 border border-slate-300 rounded-lg outline-none" required>
                 </div>
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-1">HTML File Path (Relative)</label>
-                    <input type="text" id="test-path" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" placeholder="e.g., 2021_Paper_1/jee_cbt.html" required>
-                    <p class="text-xs text-slate-500 mt-1">Ensure the HTML file and its 'presetups' folder are in the same directory relative to this Home Page.</p>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Path</label>
+                    <input type="text" id="test-path" class="w-full px-3 py-2 border border-slate-300 rounded-lg outline-none" required>
                 </div>
                 <div class="flex justify-end gap-3 mt-6">
                     <button type="button" onclick="closeAddModal()" class="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-lg font-medium">Cancel</button>
-                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700">Add Test</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700">Add</button>
                 </div>
             </form>
         </div>
@@ -143,24 +154,18 @@
         // --- DOM ELEMENTS ---
         const loginScreen = document.getElementById('login-screen');
         const dashboardScreen = document.getElementById('dashboard-screen');
-        const loginForm = document.getElementById('login-form');
-        const loginError = document.getElementById('login-error');
         const testGrid = document.getElementById('test-grid');
         const emptyState = document.getElementById('empty-state');
-        const addModal = document.getElementById('add-modal');
-        const createTestBtn = document.getElementById('create-test-btn');
-        
-        // Notification Elements
         const todaysTestBanner = document.getElementById('todays-test-banner');
-        const todaysTestName = document.getElementById('todays-test-name');
-        const startTodayBtn = document.getElementById('start-today-btn');
+        const scanBtn = document.getElementById('scan-btn');
+        const createTestBtn = document.getElementById('create-test-btn');
+        const folderInput = document.getElementById('folder-input');
 
-        // --- LOGIN LOGIC ---
-        loginForm.addEventListener('submit', (e) => {
+        // --- LOGIN ---
+        document.getElementById('login-form').addEventListener('submit', (e) => {
             e.preventDefault();
             const id = document.getElementById('login-id').value.trim().toLowerCase();
             const pass = document.getElementById('login-pass').value;
-            
             const user = VALID_USERS.find(u => u.id === id && u.pass === pass);
 
             if (user) {
@@ -169,15 +174,13 @@
                 dashboardScreen.classList.remove('hidden');
                 updateDashboardUI();
                 renderTests();
-                checkTodaysTest(); // Check for dates on login
+                checkTodaysTest();
             } else {
-                loginError.classList.remove('hidden');
+                document.getElementById('login-error').classList.remove('hidden');
             }
         });
 
-        function logout() {
-            location.reload();
-        }
+        function logout() { location.reload(); }
 
         function updateDashboardUI() {
             document.getElementById('dash-name').textContent = currentUser.name;
@@ -186,15 +189,74 @@
             img.src = currentUser.image;
             img.onerror = () => { img.src = "https://cdn-icons-png.flaticon.com/512/149/149071.png"; };
 
-            // --- ADMIN CHECK ---
+            // Admin Logic
             if (currentUser.id === 'itzgoku07') {
+                scanBtn.classList.remove('hidden');
                 createTestBtn.classList.remove('hidden');
             } else {
+                scanBtn.classList.add('hidden');
                 createTestBtn.classList.add('hidden');
             }
         }
 
-        // --- TEST MANAGEMENT ---
+        // --- FOLDER SCANNER LOGIC ---
+        function triggerScan() {
+            // Trigger the hidden file input
+            folderInput.click();
+        }
+
+        folderInput.addEventListener('change', (e) => {
+            const files = e.target.files;
+            if (!files.length) return;
+
+            let newTestsFound = 0;
+            const dateRegex = /^\d{2}-\d{2}-\d{4}$/; // Matches DD-MM-YYYY
+            const fileRegex = /^\d+-\d+-\d+\.html$/; // Matches NN-NN-NNNN.html
+
+            // Clear existing auto-scanned tests to avoid duplicates, or keep appending? 
+            // Let's verify and append unique ones.
+            
+            for (const file of files) {
+                // webkitRelativePath example: "test/01-12-2025/11-22-3333.html"
+                const pathParts = file.webkitRelativePath.split('/');
+                
+                // We need at least: RootFolder / DateFolder / File
+                if (pathParts.length >= 3) {
+                    const folderName = pathParts[pathParts.length - 2]; // "01-12-2025"
+                    const fileName = pathParts[pathParts.length - 1];   // "11-22-3333.html"
+
+                    if (dateRegex.test(folderName) && fileRegex.test(fileName)) {
+                        const fileCode = fileName.replace('.html', ''); // "11-22-3333"
+                        const displayName = `${folderName} [${fileCode}]`;
+                        
+                        // Construct relative path for the link
+                        // NOTE: Since we can't save the full path object, we assume
+                        // the user keeps the 'test' folder next to 'home_page.html'
+                        const relativePath = file.webkitRelativePath; 
+
+                        // Avoid Duplicates
+                        if (!tests.some(t => t.path === relativePath)) {
+                            tests.push({ name: displayName, path: relativePath, date: folderName });
+                            newTestsFound++;
+                        }
+                    }
+                }
+            }
+
+            if (newTestsFound > 0) {
+                localStorage.setItem('jee_tests', JSON.stringify(tests));
+                alert(`Successfully imported ${newTestsFound} tests!`);
+                renderTests();
+                checkTodaysTest();
+            } else {
+                alert("No matching test files found.\nExpected format: test/DD-MM-YYYY/NN-NN-NNNN.html");
+            }
+            
+            // Reset input
+            folderInput.value = '';
+        });
+
+        // --- RENDERING ---
         function renderTests() {
             testGrid.innerHTML = '';
             if (tests.length === 0) {
@@ -203,23 +265,25 @@
             }
             emptyState.classList.add('hidden');
 
+            tests.sort((a, b) => new Date(b.date?.split('-').reverse().join('-')) - new Date(a.date?.split('-').reverse().join('-')));
+
             tests.forEach((test, index) => {
                 const card = document.createElement('div');
                 card.className = "bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition group relative";
                 
-                // Show delete button ONLY for admin
+                // Delete button for admin
                 const deleteBtnHtml = (currentUser && currentUser.id === 'itzgoku07') 
                     ? `<button onclick="deleteTest(${index})" class="text-slate-300 hover:text-red-500 transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>`
                     : '';
 
                 card.innerHTML = `
                     <div class="flex items-start justify-between">
-                        <div class="w-10 h-10 bg-emerald-100 text-emerald-600 rounded-lg flex items-center justify-center mb-3">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        <div class="w-10 h-10 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center mb-3 font-bold text-xs">
+                            ${test.date || 'TEST'}
                         </div>
                         ${deleteBtnHtml}
                     </div>
-                    <h3 class="font-bold text-lg text-slate-800 mb-1">${test.name}</h3>
+                    <h3 class="font-bold text-lg text-slate-800 mb-1 truncate" title="${test.name}">${test.name}</h3>
                     <p class="text-xs text-slate-500 font-mono bg-slate-50 p-1 rounded mb-4 truncate">${test.path}</p>
                     <button onclick="launchTest(${index})" class="w-full py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-lg font-medium transition">Start Test &rarr;</button>
                 `;
@@ -227,67 +291,60 @@
             });
         }
 
+        // --- TODAY'S TEST LOGIC ---
         function checkTodaysTest() {
-            // 1. Get today's date in DD-MM-YYYY format
             const today = new Date();
             const dd = String(today.getDate()).padStart(2, '0');
-            const mm = String(today.getMonth() + 1).padStart(2, '0'); // Jan is 0
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
             const yyyy = today.getFullYear();
-            const dateString = `${dd}-${mm}-${yyyy}`;
+            const todayStr = `${dd}-${mm}-${yyyy}`;
 
-            // 2. Find matching test (checks if name INCLUDES the date string)
-            // This works for "01-12-2025" or "Test 01-12-2025 Paper 1"
-            const matchingTestIndex = tests.findIndex(t => t.name.includes(dateString));
+            // Check if ANY test matches today's date string found in folder name or test name
+            const matchingTestIndex = tests.findIndex(t => t.name.includes(todayStr) || t.date === todayStr);
 
             if (matchingTestIndex !== -1) {
                 const test = tests[matchingTestIndex];
-                todaysTestName.textContent = test.name;
+                document.getElementById('todays-test-name').textContent = test.name;
                 todaysTestBanner.classList.remove('hidden');
-                
-                // Bind Start Button
-                startTodayBtn.onclick = () => launchTest(matchingTestIndex);
+                document.getElementById('start-today-btn').onclick = () => launchTest(matchingTestIndex);
             } else {
                 todaysTestBanner.classList.add('hidden');
             }
         }
 
-        function openAddModal() { addModal.classList.remove('hidden'); }
-        function closeAddModal() { addModal.classList.add('hidden'); document.getElementById('add-test-form').reset(); }
-
-        document.getElementById('add-test-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.getElementById('test-name').value;
-            const path = document.getElementById('test-path').value;
-            
-            tests.push({ name, path });
-            localStorage.setItem('jee_tests', JSON.stringify(tests));
-            renderTests();
-            checkTodaysTest(); // Re-check in case the new test is for today
-            closeAddModal();
-        });
-
+        // --- UTILS ---
         function deleteTest(index) {
             if(confirm("Remove this test shortcut?")) {
                 tests.splice(index, 1);
                 localStorage.setItem('jee_tests', JSON.stringify(tests));
                 renderTests();
-                checkTodaysTest(); // Re-check if we deleted today's test
+                checkTodaysTest();
             }
         }
 
         function launchTest(index) {
             const test = tests[index];
             if (!currentUser) return;
-
-            // Construct URL with query parameters for the user session
             const params = new URLSearchParams();
             params.append('user', currentUser.name);
             params.append('id', currentUser.id);
-            params.append('img', currentUser.image); // Pass the image path
-            
-            // Redirect
+            params.append('img', currentUser.image);
             window.location.href = `${test.path}?${params.toString()}`;
         }
+
+        // --- MANUAL MODAL ---
+        function openAddModal() { document.getElementById('add-modal').classList.remove('hidden'); }
+        function closeAddModal() { document.getElementById('add-modal').classList.add('hidden'); document.getElementById('add-test-form').reset(); }
+        
+        document.getElementById('add-test-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('test-name').value;
+            const path = document.getElementById('test-path').value;
+            tests.push({ name, path, date: 'Manual' });
+            localStorage.setItem('jee_tests', JSON.stringify(tests));
+            renderTests();
+            closeAddModal();
+        });
     </script>
 </body>
 </html>
