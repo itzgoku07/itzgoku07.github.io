@@ -1,123 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JEE Advanced CBT Mock</title>
+    <title>JEE CBT Portal - Home</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: #f1f5f9; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-
-        /* JEE Status Colors - Refined */
-        :root {
-            --status-answered: #10b981;       /* Emerald 500 */
-            --status-not-answered: #ef4444;   /* Red 500 */
-            --status-not-visited: #ffffff;    /* White */
-            --status-review: #8b5cf6;         /* Violet 500 */
-            --status-ans-review: #6366f1;     /* Indigo 500 */
-        }
-
-        /* Palette Buttons */
-        .p-btn {
-            width: 40px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #e2e8f0;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-            position: relative;
-        }
-
-        .p-btn:hover { transform: translateY(-1px); box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .p-btn.active-q { border: 2px solid #3b82f6; ring: 2px solid #93c5fd; transform: scale(1.05); z-index: 10; }
-
-        /* Status Classes */
-        .st-not-visited { background-color: var(--status-not-visited); color: #334155; }
-        .st-not-answered { background-color: var(--status-not-answered); color: white; border-color: #dc2626; clip-path: polygon(0 0, 100% 0, 100% 75%, 50% 100%, 0 75%); }
-        .st-answered { background-color: var(--status-answered); color: white; border-color: #059669; clip-path: polygon(50% 0, 100% 25%, 100% 100%, 0 100%, 0 25%); }
-        .st-review { background-color: var(--status-review); color: white; border-radius: 50%; }
-        .st-ans-review { background-color: var(--status-review); color: white; border-radius: 50%; position: relative; }
-        .st-ans-review::after {
-            content: '✓';
-            position: absolute;
-            bottom: -2px;
-            right: -4px;
-            width: 14px;
-            height: 14px;
-            background-color: var(--status-answered);
-            border-radius: 50%;
-            border: 1px solid white;
-            font-size: 9px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        /* Tabs */
-        .tab-btn {
-            position: relative;
-            transition: all 0.2s;
-            border-radius: 8px 8px 0 0;
-            background: rgba(255, 255, 255, 0.1);
-        }
-        .tab-btn:hover { background: rgba(255, 255, 255, 0.2); }
-        .tab-btn.active {
-            background: white;
-            color: #1e293b;
-            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
-        }
-        .tab-btn.active::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: #3b82f6;
-            border-radius: 3px 3px 0 0;
-        }
-
-        /* Custom Radio */
-        .custom-radio {
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #cbd5e1;
-            border-radius: 50%;
-            margin-right: 12px;
-            margin-top: 2px;
-            position: relative;
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-        .custom-radio:checked { border-color: #3b82f6; border-width: 6px; }
-        .option-row:hover .custom-radio { border-color: #94a3b8; }
-        .option-row { transition: background 0.15s; border-radius: 8px; padding: 8px; }
-        .option-row:hover { background: #f8fafc; }
-
+        .animate-pulse-slow { animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .7; } }
     </style>
 </head>
-<body class="h-screen flex flex-col bg-slate-50 overflow-hidden text-slate-800">
+<body class="h-screen flex flex-col bg-slate-100 text-slate-800">
 
-    <!-- LOGIN OVERLAY (Top Level) -->
-    <div id="login-overlay" class="fixed inset-0 bg-slate-900 z-[60] flex items-center justify-center p-4">
+    <!-- 1. LOGIN SCREEN -->
+    <div id="login-screen" class="fixed inset-0 bg-slate-900 z-50 flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden">
-            <div class="bg-blue-600 p-6 text-center">
-                <h2 class="text-2xl font-bold text-white tracking-wide">Candidate Login</h2>
-                <p class="text-blue-100 text-sm mt-1">JEE (Advanced) Computer Based Test</p>
+            <div class="bg-blue-600 p-8 text-center">
+                <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold text-white">J</div>
+                <h2 class="text-3xl font-bold text-white tracking-wide">Candidate Login</h2>
+                <p class="text-blue-100 text-sm mt-1">JEE (Advanced) CBT Portal</p>
             </div>
             
             <form id="login-form" class="p-8 space-y-6">
@@ -139,475 +42,252 @@
                     Login
                 </button>
             </form>
-            <div class="bg-slate-50 px-8 py-4 text-center text-xs text-slate-500 border-t border-slate-100">
-                System optimized for Chrome & Firefox
-            </div>
         </div>
     </div>
 
-    <!-- Start Overlay (Instructions) - Initially Hidden -->
-    <div id="start-overlay" class="hidden fixed inset-0 bg-white/95 backdrop-blur-sm z-50 flex flex-col items-center justify-center p-6">
-        <div class="bg-white max-w-4xl w-full rounded-2xl shadow-2xl overflow-hidden border border-slate-200 flex flex-col max-h-[90vh]">
-            <div class="bg-gradient-to-r from-blue-600 to-indigo-700 p-6 text-white text-center">
-                <h1 class="text-3xl font-bold tracking-tight">JEE (Advanced) Mock Test</h1>
-                <p class="text-blue-100 mt-2 opacity-90">Please read the instructions carefully before proceeding.</p>
+    <!-- 2. DASHBOARD (Initially Hidden) -->
+    <div id="dashboard-screen" class="hidden flex-1 flex flex-col h-full">
+        <!-- Header -->
+        <header class="bg-white border-b border-slate-200 h-16 flex items-center justify-between px-6 shadow-sm z-10">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-blue-600 rounded-lg text-white flex items-center justify-center font-bold">P</div>
+                <h1 class="font-bold text-xl text-slate-800">My Tests</h1>
             </div>
-            
-            <div class="p-8 overflow-y-auto custom-scrollbar flex-1 bg-slate-50">
-                <h2 class="font-bold text-lg text-slate-800 mb-4 flex items-center gap-2">
-                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    General Instructions
-                </h2>
-                <div class="prose prose-sm text-slate-600 max-w-none">
-                    <ol class="list-decimal pl-5 space-y-4">
-                        <li>The server clock will be set at the server. The countdown timer in the top right corner of the screen will display the remaining time available for you to complete the examination. When the timer reaches zero, the examination will end by itself.</li>
-                        <li>The Question Palette displayed on the right side of the screen will show the status of each question using one of the following symbols:
-                            <div class="grid grid-cols-2 gap-4 mt-3 bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
-                                <div class="flex items-center gap-3"><span class="w-8 h-8 flex items-center justify-center border bg-white rounded shadow-sm text-xs font-bold text-slate-400">1</span> <span class="text-xs">Not Visited</span></div>
-                                <div class="flex items-center gap-3"><div class="w-8 h-8 flex items-center justify-center border bg-red-500 text-white text-xs font-bold" style="clip-path: polygon(0 0, 100% 0, 100% 75%, 50% 100%, 0 75%);">2</div> <span class="text-xs">Not Answered</span></div>
-                                <div class="flex items-center gap-3"><div class="w-8 h-8 flex items-center justify-center border bg-emerald-500 text-white text-xs font-bold" style="clip-path: polygon(50% 0, 100% 25%, 100% 100%, 0 100%, 0 25%);">3</div> <span class="text-xs">Answered</span></div>
-                                <div class="flex items-center gap-3"><span class="w-8 h-8 flex items-center justify-center border bg-violet-500 text-white rounded-full text-xs font-bold">4</span> <span class="text-xs">Marked for Review</span></div>
-                            </div>
-                        </li>
-                        <li>Navigating to a Question:
-                            <ul class="list-disc ml-5 mt-1 space-y-1">
-                                <li>Click on the question number in the Palette to go to that question directly.</li>
-                                <li>Click on <strong>Save & Next</strong> to save your answer and move to the next.</li>
-                                <li>Click on <strong>Mark for Review & Next</strong> to save, mark for review, and move next.</li>
-                            </ul>
-                        </li>
-                    </ol>
+            <div class="flex items-center gap-4">
+                <div class="text-right">
+                    <div id="dash-name" class="font-bold text-sm text-slate-800">Guest</div>
+                    <div id="dash-id" class="text-xs text-slate-500">ID: --</div>
                 </div>
+                <img id="dash-avatar" src="" class="w-10 h-10 rounded-full border border-slate-200 object-cover bg-slate-100">
+                <button onclick="logout()" class="text-sm text-red-500 hover:bg-red-50 px-3 py-1 rounded font-medium ml-2">Logout</button>
             </div>
+        </header>
 
-            <div class="p-6 bg-white border-t border-slate-200 flex flex-col items-center gap-4">
-                <label class="flex items-center gap-3 p-4 bg-blue-50 border border-blue-100 rounded-xl w-full cursor-pointer hover:bg-blue-100 transition-colors select-none group">
-                    <input type="checkbox" id="confirm-check" class="w-5 h-5 text-blue-600 rounded focus:ring-blue-500 border-gray-300 transition cursor-pointer">
-                    <span class="text-sm font-medium text-slate-700 group-hover:text-blue-800">I have read and understood the instructions and agree to adhere to the examination rules.</span>
-                </label>
+        <!-- Content -->
+        <main class="flex-1 p-8 overflow-y-auto">
+            <div class="max-w-5xl mx-auto">
                 
-                <button id="start-btn" disabled onclick="startTest()" class="w-full sm:w-auto px-12 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none transition-all duration-200">
-                    I am ready to begin
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Header -->
-    <header class="h-16 bg-gradient-to-r from-slate-900 to-slate-800 text-white flex items-center justify-between px-6 shadow-md z-20">
-        <div class="flex items-center gap-3">
-            <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center font-bold text-lg shadow-inner">J</div>
-            <h1 class="font-bold text-lg tracking-wide hidden sm:block">JEE (Advanced) Mock</h1>
-        </div>
-        <div class="flex items-center gap-4">
-            <div class="bg-slate-700/50 px-4 py-2 rounded-lg border border-slate-600 flex items-center gap-2">
-                <span class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Time Left</span>
-                <span id="timer" class="font-mono text-xl font-bold text-emerald-400 w-20 text-center">180:00</span>
-            </div>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <div class="flex-1 flex overflow-hidden">
-        <!-- Left: Question Area -->
-        <main class="flex-1 flex flex-col bg-slate-50 relative z-0">
-            
-            <!-- Subject Tabs -->
-            <div class="bg-slate-800 text-slate-300 flex px-4 pt-4 gap-1 select-none" id="subject-tabs">
-                <button class="tab-btn px-6 py-2.5 font-medium text-sm active" onclick="switchSubject('Physics')">Physics</button>
-                <button class="tab-btn px-6 py-2.5 font-medium text-sm" onclick="switchSubject('Chemistry')">Chemistry</button>
-                <button class="tab-btn px-6 py-2.5 font-medium text-sm" onclick="switchSubject('Mathematics')">Mathematics</button>
-            </div>
-
-            <!-- Question Header -->
-            <div class="bg-white border-b border-slate-200 px-6 py-3 flex justify-between items-center shadow-sm z-10">
-                <h2 class="font-bold text-slate-800 text-lg" id="current-subject-display">Physics</h2>
-                <div class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm font-bold border border-blue-100">
-                    Question No. <span id="q-num-display">1</span>
-                </div>
-            </div>
-            
-            <!-- Question Body -->
-            <div class="flex-1 overflow-y-auto p-6 md:p-8 custom-scrollbar">
-                <div class="max-w-4xl mx-auto bg-white p-6 rounded-2xl shadow-sm border border-slate-200 min-h-[400px]">
-                    <div class="flex justify-between border-b border-slate-100 pb-4 mb-6">
-                        <span class="text-xs font-bold tracking-wider text-slate-400 uppercase">Question Type</span>
-                        <div class="flex items-center gap-3">
-                            <span class="px-2 py-1 bg-emerald-100 text-emerald-700 rounded text-xs font-bold">+4 Correct</span>
-                            <span class="px-2 py-1 bg-red-100 text-red-700 rounded text-xs font-bold">-1 Wrong</span>
+                <!-- TODAY'S TEST NOTIFICATION BANNER -->
+                <div id="todays-test-banner" class="hidden mb-8 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-xl shadow-lg p-1 text-white animate-fade-in-up">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-lg p-4 flex flex-col sm:flex-row items-center justify-between gap-4 border border-white/20">
+                        <div class="flex items-center gap-4">
+                            <div class="p-3 bg-white rounded-full text-emerald-600 shadow-sm animate-pulse-slow">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg">Test Available for Today!</h3>
+                                <p class="text-emerald-50 text-sm" id="todays-test-name">JEE Mock Paper 1</p>
+                            </div>
                         </div>
-                    </div>
-
-                    <div id="question-text" class="text-lg text-slate-800 font-medium leading-relaxed mb-8 select-text">
-                        <!-- Question injected here -->
-                    </div>
-
-                    <div id="options-container" class="space-y-3">
-                        <!-- Options injected here -->
+                        <button id="start-today-btn" class="bg-white text-emerald-700 hover:bg-emerald-50 font-bold py-2 px-6 rounded-lg shadow-md transition transform active:scale-95 whitespace-nowrap">
+                            Start Now &rarr;
+                        </button>
                     </div>
                 </div>
-            </div>
 
-            <!-- Footer Buttons -->
-            <div class="bg-white border-t border-slate-200 p-4 flex flex-wrap items-center justify-between gap-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-20">
-                <div class="flex gap-3">
-                    <button onclick="handleNavigation('prev')" class="px-4 py-2 rounded-lg border border-slate-300 text-slate-600 font-semibold hover:bg-slate-50 hover:text-slate-800 transition active:scale-95 text-sm">
-                        &larr; Back
-                    </button>
-                    <button onclick="handleClear()" class="px-4 py-2 rounded-lg border border-slate-300 text-slate-600 font-semibold hover:bg-red-50 hover:text-red-600 hover:border-red-200 transition active:scale-95 text-sm">
-                        Clear Response
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-lg font-semibold text-slate-600">Available Papers</h2>
+                    <!-- Added ID and 'hidden' class by default -->
+                    <button id="create-test-btn" onclick="openAddModal()" class="hidden flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium shadow-md transition-all active:scale-95">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                        Create New Test
                     </button>
                 </div>
-                <div class="flex gap-3">
-                    <button onclick="handleSaveAndMarkReview()" class="px-5 py-2 rounded-lg bg-violet-600 hover:bg-violet-700 text-white font-semibold shadow-md shadow-violet-200 hover:shadow-lg active:scale-95 transition text-sm">
-                        Mark for Review & Next
-                    </button>
-                    <button onclick="handleSaveAndNext()" class="px-6 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold shadow-md shadow-emerald-200 hover:shadow-lg active:scale-95 transition text-sm">
-                        Save & Next
-                    </button>
+
+                <!-- Test Grid -->
+                <div id="test-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Cards will be injected here -->
+                </div>
+                
+                <div id="empty-state" class="hidden text-center py-20">
+                    <div class="w-16 h-16 bg-slate-200 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-400 text-3xl">?</div>
+                    <h3 class="text-slate-500 font-medium">No tests found. Create one to get started!</h3>
                 </div>
             </div>
         </main>
+    </div>
 
-        <!-- Right: Sidebar -->
-        <aside class="w-80 bg-white border-l border-slate-200 flex flex-col shadow-xl z-10 hidden lg:flex">
-            <!-- Profile -->
-            <div class="p-4 bg-slate-50 border-b border-slate-200 flex items-center gap-4">
-                <div class="w-12 h-12 bg-slate-200 rounded-full flex items-center justify-center border-2 border-white shadow-sm overflow-hidden">
-                    <!-- Default placeholder before login -->
-                    <img id="profile-image" src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Profile" class="w-full h-full object-cover">
+    <!-- 3. ADD TEST MODAL -->
+    <div id="add-modal" class="hidden fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white w-full max-w-md rounded-xl shadow-xl p-6">
+            <h3 class="text-xl font-bold text-slate-800 mb-4">Add New Test</h3>
+            <form id="add-test-form" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">Test Name</label>
+                    <input type="text" id="test-name" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" placeholder="e.g., 01-12-2025 Paper 1" required>
+                    <p class="text-xs text-slate-500 mt-1">Tip: Use format DD-MM-YYYY in name for auto-detection.</p>
                 </div>
                 <div>
-                    <div class="font-bold text-slate-800" id="profile-name">Guest User</div>
-                    <div class="text-xs text-slate-500 font-medium bg-slate-200 px-2 py-0.5 rounded-full inline-block mt-0.5" id="profile-id-display">Candidate ID: 123456</div>
+                    <label class="block text-sm font-medium text-slate-700 mb-1">HTML File Path (Relative)</label>
+                    <input type="text" id="test-path" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" placeholder="e.g., 2021_Paper_1/jee_cbt.html" required>
+                    <p class="text-xs text-slate-500 mt-1">Ensure the HTML file and its 'presetups' folder are in the same directory relative to this Home Page.</p>
                 </div>
-            </div>
-
-            <!-- Legend -->
-            <div class="bg-slate-50 p-4 border-b border-slate-200 text-[11px] grid grid-cols-2 gap-2 text-slate-600">
-                 <div class="flex items-center gap-1.5"><div class="w-3 h-3 bg-white border border-slate-300"></div> Not Visited</div>
-                 <div class="flex items-center gap-1.5"><div class="w-3 h-3 bg-red-500 rounded-[3px] rounded-bl-[8px]"></div> Not Answered</div>
-                 <div class="flex items-center gap-1.5"><div class="w-3 h-3 bg-emerald-500 rounded-[3px] rounded-tl-[8px]"></div> Answered</div>
-                 <div class="flex items-center gap-1.5"><div class="w-3 h-3 bg-violet-500 rounded-full"></div> Review</div>
-            </div>
-
-            <div class="p-3 bg-blue-50/50 text-blue-800 text-xs font-bold uppercase tracking-wider text-center border-b border-blue-100">
-                Question Palette
-            </div>
-
-            <div class="flex-1 overflow-y-auto p-4 custom-scrollbar bg-slate-50/30">
-                <div class="flex flex-wrap gap-2 justify-center content-start" id="palette-grid">
-                    <!-- Palette buttons generated here -->
+                <div class="flex justify-end gap-3 mt-6">
+                    <button type="button" onclick="closeAddModal()" class="px-4 py-2 text-slate-600 hover:bg-slate-100 rounded-lg font-medium">Cancel</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700">Add Test</button>
                 </div>
-            </div>
-            
-            <div class="p-4 bg-white border-t border-slate-200">
-                <button class="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold shadow-lg shadow-blue-200 hover:shadow-blue-300 transition-all active:scale-95 text-sm uppercase tracking-wide">
-                    Submit Test
-                </button>
-            </div>
-        </aside>
+            </form>
+        </div>
     </div>
 
     <script>
-        // --- AUTHENTICATION LOGIC ---
-        
+        // --- CONFIGURATION ---
         const VALID_USERS = [
-            { 
-                id: 'itzgoku07', 
-                pass: 'TheRSN13', 
-                name: 'Rishab Singh', 
-                image: 'presetups/itachi.jpg' 
-            },
-            { 
-                id: 'soulreaper', 
-                pass: 'saltyballs', 
-                name: 'Atharva Sharma', 
-                image: 'presetups/monkey.jpg'
-            }
+            { id: 'itzgoku07', pass: 'TheRSN13', name: 'Rishab Singh', image: 'presetups/itachi.jpg' },
+            { id: 'soulreaper', pass: 'saltyballs', name: 'Atharva Sharma', image: 'presetups/monkey.jpg' }
         ];
 
-        const loginOverlay = document.getElementById('login-overlay');
-        const loginForm = document.getElementById('login-form');
-        const loginIdInput = document.getElementById('login-id');
-        const loginPassInput = document.getElementById('login-pass');
-        const loginError = document.getElementById('login-error');
-        const startOverlay = document.getElementById('start-overlay');
-        const profileName = document.getElementById('profile-name');
-        const profileIdDisplay = document.getElementById('profile-id-display');
-        const profileImage = document.getElementById('profile-image');
+        let currentUser = null;
+        let tests = JSON.parse(localStorage.getItem('jee_tests') || '[]');
 
+        // --- DOM ELEMENTS ---
+        const loginScreen = document.getElementById('login-screen');
+        const dashboardScreen = document.getElementById('dashboard-screen');
+        const loginForm = document.getElementById('login-form');
+        const loginError = document.getElementById('login-error');
+        const testGrid = document.getElementById('test-grid');
+        const emptyState = document.getElementById('empty-state');
+        const addModal = document.getElementById('add-modal');
+        const createTestBtn = document.getElementById('create-test-btn');
+        
+        // Notification Elements
+        const todaysTestBanner = document.getElementById('todays-test-banner');
+        const todaysTestName = document.getElementById('todays-test-name');
+        const startTodayBtn = document.getElementById('start-today-btn');
+
+        // --- LOGIN LOGIC ---
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const inputId = loginIdInput.value.trim().toLowerCase(); // Case insensitive ID
-            const inputPass = loginPassInput.value; // Case sensitive Password
-
-            const user = VALID_USERS.find(u => u.id === inputId && u.pass === inputPass);
+            const id = document.getElementById('login-id').value.trim().toLowerCase();
+            const pass = document.getElementById('login-pass').value;
+            
+            const user = VALID_USERS.find(u => u.id === id && u.pass === pass);
 
             if (user) {
-                // Successful Login
-                loginError.classList.add('hidden');
-                loginOverlay.style.display = 'none'; // Hide Login
-                startOverlay.classList.remove('hidden'); // Show Instructions
-                startOverlay.style.display = 'flex'; // Ensure flex layout
-                
-                profileName.textContent = user.name;
-                profileIdDisplay.textContent = `Candidate ID: ${inputId}`;
-                
-                // Set Image from local folder path
-                profileImage.src = user.image;
-                
-                // Optional: Add basic error handling if file is missing in the folder
-                profileImage.onerror = function() {
-                    console.warn("Image not found in 'presetups' folder. Using default.");
-                    this.src = "https://cdn-icons-png.flaticon.com/512/149/149071.png";
-                };
-
+                currentUser = user;
+                loginScreen.classList.add('hidden');
+                dashboardScreen.classList.remove('hidden');
+                updateDashboardUI();
+                renderTests();
+                checkTodaysTest(); // Check for dates on login
             } else {
-                // Failed Login
                 loginError.classList.remove('hidden');
-                loginPassInput.value = '';
-                loginPassInput.focus();
             }
         });
 
-        // --- Mock Data ---
-        const SUBJECTS = ['Physics', 'Chemistry', 'Mathematics'];
-        const Q_PER_SUBJECT = 20;
-        const TOTAL_QUESTIONS = SUBJECTS.length * Q_PER_SUBJECT;
-
-        // Generate questions with subjects
-        const questions = Array.from({ length: TOTAL_QUESTIONS }, (_, i) => {
-            let subjectIndex = Math.floor(i / Q_PER_SUBJECT);
-            let subjectName = SUBJECTS[subjectIndex];
-            let qNumInSubject = (i % Q_PER_SUBJECT) + 1;
-            
-            return {
-                id: i, // Global Index
-                subject: subjectName,
-                qNum: qNumInSubject,
-                text: `[${subjectName} Q${qNumInSubject}] This is a sample ${subjectName} question. The interface has been refined for better readability and aesthetics. Select the correct option below.`,
-                options: [
-                    `Option A for ${subjectName} Q${qNumInSubject}`,
-                    `Option B for ${subjectName} Q${qNumInSubject}`,
-                    `Option C for ${subjectName} Q${qNumInSubject}`,
-                    `Option D for ${subjectName} Q${qNumInSubject}`
-                ],
-                status: 'not-visited',
-                selectedOption: null
-            };
-        });
-
-        // Set initial state
-        questions[0].status = 'not-answered';
-        let currentQIndex = 0;
-        let currentSubject = 'Physics';
-
-        // --- DOM Elements ---
-        const qNumDisplay = document.getElementById('q-num-display');
-        const currentSubjectDisplay = document.getElementById('current-subject-display');
-        const qText = document.getElementById('question-text');
-        const optionsContainer = document.getElementById('options-container');
-        const paletteGrid = document.getElementById('palette-grid');
-        const subjectTabs = document.getElementById('subject-tabs');
-
-        // --- Initialization ---
-        function init() {
-            renderPalette();
-            loadQuestion(0);
+        function logout() {
+            location.reload();
         }
 
-        // --- Start Logic ---
-        const startBtn = document.getElementById('start-btn');
-        const confirmCheck = document.getElementById('confirm-check');
-        // startOverlay defined above in Auth section
+        function updateDashboardUI() {
+            document.getElementById('dash-name').textContent = currentUser.name;
+            document.getElementById('dash-id').textContent = `ID: ${currentUser.id}`;
+            const img = document.getElementById('dash-avatar');
+            img.src = currentUser.image;
+            img.onerror = () => { img.src = "https://cdn-icons-png.flaticon.com/512/149/149071.png"; };
 
-        confirmCheck.addEventListener('change', (e) => {
-            startBtn.disabled = !e.target.checked;
-        });
-
-        function startTest() {
-            startOverlay.classList.add('opacity-0', 'pointer-events-none');
-            setTimeout(() => { startOverlay.style.display = 'none'; }, 500);
-            
-            // Fullscreen attempt
-            try {
-                if (document.documentElement.requestFullscreen) {
-                    document.documentElement.requestFullscreen().catch(err => console.log("Fullscreen blocked"));
-                }
-            } catch (e) { console.log("Fullscreen not supported"); }
-            
-            startTimer();
-        }
-
-        // --- Core Logic ---
-        
-        function switchSubject(newSubject) {
-            currentSubject = newSubject;
-            
-            // Find first question of this subject
-            const firstQ = questions.find(q => q.subject === newSubject);
-            if (firstQ) {
-                loadQuestion(firstQ.id);
+            // --- ADMIN CHECK ---
+            if (currentUser.id === 'itzgoku07') {
+                createTestBtn.classList.remove('hidden');
+            } else {
+                createTestBtn.classList.add('hidden');
             }
         }
 
-        function updateTabs() {
-            Array.from(subjectTabs.children).forEach(btn => {
-                if (btn.innerText === currentSubject) {
-                    btn.classList.add('active', 'text-slate-800', 'bg-white');
-                    btn.classList.remove('text-slate-300');
-                } else {
-                    btn.classList.remove('active', 'text-slate-800', 'bg-white');
-                    btn.classList.add('text-slate-300');
-                }
-            });
-        }
-
-        function renderPalette() {
-            paletteGrid.innerHTML = '';
-            
-            // Filter questions for current subject ONLY
-            const subjectQuestions = questions.filter(q => q.subject === currentSubject);
-
-            subjectQuestions.forEach((q) => {
-                const btn = document.createElement('div');
-                btn.className = `p-btn st-${q.status} ${q.id === currentQIndex ? 'active-q' : ''}`;
-                btn.innerText = q.qNum; // Show Subject-Specific Number (1-20)
-                btn.onclick = () => loadQuestion(q.id);
-                paletteGrid.appendChild(btn);
-            });
-        }
-
-        function loadQuestion(index) {
-            // Update status of previously visited question if it was just "not-visited"
-            if (questions[currentQIndex].status === 'not-visited') {
-                questions[currentQIndex].status = 'not-answered';
+        // --- TEST MANAGEMENT ---
+        function renderTests() {
+            testGrid.innerHTML = '';
+            if (tests.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
             }
-            
-            currentQIndex = index;
-            const q = questions[currentQIndex];
+            emptyState.classList.add('hidden');
 
-            // Auto-switch subject if we navigated to a new subject (e.g. via Next button)
-            if (q.subject !== currentSubject) {
-                currentSubject = q.subject;
-            }
-
-            // If current is white, make it red (visited but not answered)
-            if (q.status === 'not-visited') {
-                q.status = 'not-answered';
-            }
-
-            updateTabs();
-            renderPalette();
-            
-            qNumDisplay.innerText = q.qNum; // Show subject-specific number
-            currentSubjectDisplay.innerText = q.subject;
-            qText.innerText = q.text;
-
-            // Fade in effect for new question
-            qText.style.opacity = '0';
-            setTimeout(() => qText.style.opacity = '1', 50);
-
-            optionsContainer.innerHTML = '';
-            q.options.forEach((opt, idx) => {
-                const row = document.createElement('label');
-                row.className = 'option-row flex items-start cursor-pointer group';
+            tests.forEach((test, index) => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition group relative";
                 
-                const radio = document.createElement('input');
-                radio.type = 'radio';
-                radio.name = 'option';
-                radio.className = 'custom-radio flex-shrink-0';
-                radio.value = idx;
-                radio.checked = q.selectedOption === idx;
-                radio.onchange = () => { q.selectedOption = idx; };
+                // Show delete button ONLY for admin
+                const deleteBtnHtml = (currentUser && currentUser.id === 'itzgoku07') 
+                    ? `<button onclick="deleteTest(${index})" class="text-slate-300 hover:text-red-500 transition"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg></button>`
+                    : '';
 
-                const span = document.createElement('span');
-                span.innerText = opt;
-                span.className = "text-slate-700 font-medium pt-0.5 group-hover:text-slate-900";
-
-                row.appendChild(radio);
-                row.appendChild(span);
-                optionsContainer.appendChild(row);
+                card.innerHTML = `
+                    <div class="flex items-start justify-between">
+                        <div class="w-10 h-10 bg-emerald-100 text-emerald-600 rounded-lg flex items-center justify-center mb-3">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        </div>
+                        ${deleteBtnHtml}
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-800 mb-1">${test.name}</h3>
+                    <p class="text-xs text-slate-500 font-mono bg-slate-50 p-1 rounded mb-4 truncate">${test.path}</p>
+                    <button onclick="launchTest(${index})" class="w-full py-2 bg-slate-800 hover:bg-slate-900 text-white rounded-lg font-medium transition">Start Test &rarr;</button>
+                `;
+                testGrid.appendChild(card);
             });
         }
 
-        // --- Button Handlers ---
+        function checkTodaysTest() {
+            // 1. Get today's date in DD-MM-YYYY format
+            const today = new Date();
+            const dd = String(today.getDate()).padStart(2, '0');
+            const mm = String(today.getMonth() + 1).padStart(2, '0'); // Jan is 0
+            const yyyy = today.getFullYear();
+            const dateString = `${dd}-${mm}-${yyyy}`;
 
-        function handleSaveAndNext() {
-            const q = questions[currentQIndex];
-            if (q.selectedOption !== null) {
-                q.status = 'answered';
+            // 2. Find matching test (checks if name INCLUDES the date string)
+            // This works for "01-12-2025" or "Test 01-12-2025 Paper 1"
+            const matchingTestIndex = tests.findIndex(t => t.name.includes(dateString));
+
+            if (matchingTestIndex !== -1) {
+                const test = tests[matchingTestIndex];
+                todaysTestName.textContent = test.name;
+                todaysTestBanner.classList.remove('hidden');
+                
+                // Bind Start Button
+                startTodayBtn.onclick = () => launchTest(matchingTestIndex);
             } else {
-                q.status = 'not-answered';
+                todaysTestBanner.classList.add('hidden');
             }
-            moveToNext();
         }
 
-        function handleSaveAndMarkReview() {
-            const q = questions[currentQIndex];
-            if (q.selectedOption !== null) {
-                q.status = 'ans-review';
-            } else {
-                q.status = 'review';
-            }
-            moveToNext();
-        }
+        function openAddModal() { addModal.classList.remove('hidden'); }
+        function closeAddModal() { addModal.classList.add('hidden'); document.getElementById('add-test-form').reset(); }
 
-        function handleClear() {
-            const q = questions[currentQIndex];
-            q.selectedOption = null;
-            q.status = 'not-answered';
+        document.getElementById('add-test-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('test-name').value;
+            const path = document.getElementById('test-path').value;
             
-            const radios = document.getElementsByName('option');
-            radios.forEach(r => r.checked = false);
-            
-            renderPalette();
-        }
+            tests.push({ name, path });
+            localStorage.setItem('jee_tests', JSON.stringify(tests));
+            renderTests();
+            checkTodaysTest(); // Re-check in case the new test is for today
+            closeAddModal();
+        });
 
-        function moveToNext() {
-            if (currentQIndex < TOTAL_QUESTIONS - 1) {
-                loadQuestion(currentQIndex + 1);
-            } else {
-                // Last question of entire test
-                renderPalette();
-            }
-        }
-        
-        function handleNavigation(direction) {
-            if (direction === 'prev' && currentQIndex > 0) {
-                loadQuestion(currentQIndex - 1);
+        function deleteTest(index) {
+            if(confirm("Remove this test shortcut?")) {
+                tests.splice(index, 1);
+                localStorage.setItem('jee_tests', JSON.stringify(tests));
+                renderTests();
+                checkTodaysTest(); // Re-check if we deleted today's test
             }
         }
 
-        // --- Timer ---
-        function startTimer() {
-            let duration = 180 * 60; // 3 hours
-            const timerEl = document.getElementById('timer');
+        function launchTest(index) {
+            const test = tests[index];
+            if (!currentUser) return;
+
+            // Construct URL with query parameters for the user session
+            const params = new URLSearchParams();
+            params.append('user', currentUser.name);
+            params.append('id', currentUser.id);
+            params.append('img', currentUser.image); // Pass the image path
             
-            setInterval(() => {
-                let minutes = parseInt(duration / 60, 10);
-                let seconds = parseInt(duration % 60, 10);
-
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-
-                timerEl.textContent = minutes + ":" + seconds;
-
-                if (duration <= 300) { // Red alert for last 5 mins
-                    timerEl.classList.remove('text-emerald-400');
-                    timerEl.classList.add('text-red-400', 'animate-pulse');
-                }
-
-                if (--duration < 0) {
-                    duration = 0;
-                    // In a real app we would stop, but here we just show alert
-                    // alert("Time's up!"); // Removed alert to keep it clean
-                }
-            }, 1000);
+            // Redirect
+            window.location.href = `${test.path}?${params.toString()}`;
         }
-
-        init();
     </script>
 </body>
 </html>
